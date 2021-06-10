@@ -14,8 +14,8 @@ export default function ChatContanier(props) {
 
   const [chatList, setChatlist] = useState([])
   const [loggedUsers, setloggedUsers] = useState([])
-  const userNamesArr = []
-  const userIdArr = []
+  // const userNamesArr = []
+  // const userIdArr = []
 
   function getTime(){
     const time = new Date().toLocaleTimeString("en-GB", {
@@ -30,6 +30,10 @@ export default function ChatContanier(props) {
     var element = document.getElementById("chat-id");
     element.scrollTop = element.scrollHeight; 
   }
+
+  // function logout(){
+  //   window.location.replace("http://localhost:4000/logout");
+  // }
 
   // Trigers when user click send message and update the message to chatList array **
   async function handleSendText(text){
@@ -52,24 +56,31 @@ export default function ChatContanier(props) {
 
     // Disconnects user if try to enter from 2 tabs **
     document.getElementById("standard-full-width").focus();
-    const newUserName = Object.values(onlineUsers[0])[0]
-    const newUserId = Object.values(onlineUsers[0])[1]
-    userIdArr.push(newUserId)
-    userNamesArr.push(newUserName)
+    // let newUserName = Object.values(onlineUsers[0])[0]
+    // let newUserId = Object.values(onlineUsers[0])[1]
+    // onlineUsers.forEach(user => {
+    //   userIdArr.push(user.id)
+    //   userNamesArr.push(user.name)
+    // });
 
-    function checkIfArrayIsUnique(myArray) {
-      return myArray.length === new Set(myArray).size;
-    }
+    // function checkIfArrayIsUnique(myArray) {
+    //   return myArray.length === new Set(myArray).size;
+    // }
 
-    if (checkIfArrayIsUnique(userNamesArr)) { 
+    // if (checkIfArrayIsUnique(userNamesArr)) { 
+    // }
+
       setloggedUsers(onlineUsers)
       props.catchLoggedUsers(onlineUsers)
       setChatlist(messagesDB)
       scrollToBot()
-    } else if (!checkIfArrayIsUnique(userIdArr)) { 
-      window.location.replace("http://localhost:3000/login")
-    }
+    // }
+    //  else if (!checkIfArrayIsUnique(userNamesArr) && !checkIfArrayIsUnique(userIdArr)) { 
+    //     logout()
+    //     window.location.replace("http://localhost:3000/login")
+    //  }
   })
+  
 
   // Runs when somone quit **
   socket.on("userLeft", newUserList => {

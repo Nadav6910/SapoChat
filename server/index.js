@@ -172,7 +172,6 @@ io.on('connection', (socket) => {
         })
         saveNewMess()
       }
-      console.log(socket.id)
     }) 
 
     async function saveNewMess(){
